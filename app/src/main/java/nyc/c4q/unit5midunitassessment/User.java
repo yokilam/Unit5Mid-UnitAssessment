@@ -11,15 +11,15 @@ public class User {
     private PersonName name;
     private PersonAddress location;
     private String email;
-    private String phone;
+    private String cell;
     private PersonPicture picture;
 
     public String getEmail() {
         return email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getCell() {
+        return cell;
     }
 
     public PersonName getName() {

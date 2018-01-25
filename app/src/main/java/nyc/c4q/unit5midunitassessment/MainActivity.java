@@ -6,6 +6,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Adapter;
 
 import org.json.JSONObject;
@@ -57,5 +59,22 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "onFailure: " + t.toString() );
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.option, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.action_load:
+                SetUpRetrofit();
+                break;
+        }
+        return true;
     }
 }
