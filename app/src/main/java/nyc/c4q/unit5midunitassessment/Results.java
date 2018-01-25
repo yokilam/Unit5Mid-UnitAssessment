@@ -6,10 +6,12 @@ import java.util.List;
  * Created by yokilam on 1/24/18.
  */
 
-public class UserModel {
+public class Results {
     private List<User> userList;
 
     public List <User> getUserList() {
         return userList;
     }
+
+
 }

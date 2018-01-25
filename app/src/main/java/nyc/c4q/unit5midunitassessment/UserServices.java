@@ -10,6 +10,6 @@ import retrofit2.http.GET;
 public interface UserServices {
 
     @GET("api/?nat=us&inc=name,location,cell,email,dob,picture&results=20")
-    Call<UserModel> getUserList();
+    Call<ArrayObject> getUserList();
 
 }

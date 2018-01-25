@@ -8,24 +8,11 @@ import java.util.List;
 
 public class User {
 
-    private String gender;
-    private List<PersonName> name;
-    private List<PersonAddress> location;
+    private PersonName name;
+    private PersonAddress location;
     private String email;
     private String phone;
-    private List<PersonPicture> picture;
-
-    public String getGender() {
-        return gender;
-    }
-
-    public List <PersonName> getName() {
-        return name;
-    }
-
-    public List <PersonAddress> getLocation() {
-        return location;
-    }
+    private PersonPicture picture;
 
     public String getEmail() {
         return email;
@@ -35,7 +22,15 @@ public class User {
         return phone;
     }
 
-    public List <PersonPicture> getPicture() {
+    public PersonName getName() {
+        return name;
+    }
+
+    public PersonAddress getLocation() {
+        return location;
+    }
+
+    public PersonPicture getPicture() {
         return picture;
     }
 
