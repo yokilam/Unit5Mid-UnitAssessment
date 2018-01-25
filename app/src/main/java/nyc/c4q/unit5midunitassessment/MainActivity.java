@@ -2,7 +2,11 @@ package nyc.c4q.unit5midunitassessment;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Adapter;
 
 import org.json.JSONObject;
 
@@ -17,13 +21,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     List <User> userList = new ArrayList <>();
+    private RecyclerView rv;
     private static final String TAG = MainActivity.class.getSimpleName();
+    private UserAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SetUpRetrofit();
+        rv= findViewById(R.id.rv);
+        rv.setLayoutManager(new GridLayoutManager(this, 3));
+    }
+
+    public void SetUpRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://randomuser.me/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -31,14 +43,13 @@ public class MainActivity extends AppCompatActivity {
         UserServices userServices = retrofit.create(UserServices.class);
 
         Call<ArrayObject> call= userServices.getUserList();
-        call.enqueue(new Callback <ArrayObject>() {
+        call.enqueue(new Callback<ArrayObject>() {
             @Override
             public void onResponse(Call <ArrayObject> call, Response<ArrayObject> response) {
                 ArrayObject object= response.body();
                 userList=object.getResults();
-
+                rv.setAdapter(new UserAdapter(userList));
                 Log.d(TAG, "onResponse: " + object.getResults().get(0).getName().getFirst());
-
             }
 
             @Override
@@ -46,6 +57,5 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "onFailure: " + t.toString() );
             }
         });
-
     }
 }
